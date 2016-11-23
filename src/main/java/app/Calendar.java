@@ -8,11 +8,13 @@ import java.util.ArrayList;
 public class Calendar {
     private final long id;
     private String name;
+    private User owner;
     private ArrayList<Event> events = new ArrayList<>();
 
-    public Calendar(long id, String name) {
+    public Calendar(long id, String name, long userId) {
         this.id = id;
         this.name = name;
+        this.owner = UserSource.getUser(userId);
     }
 
     public long getId() {
@@ -21,6 +23,10 @@ public class Calendar {
 
     public String getName() {
         return name;
+    }
+
+    public User getOwner(){
+        return owner;
     }
 
     public ArrayList<Event> getEvents(){
