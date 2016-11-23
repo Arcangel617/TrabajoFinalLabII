@@ -1,4 +1,4 @@
-package hello;
+package app;
 
 /**
  * Created by arcangel on 23/11/16.
