@@ -39,4 +39,9 @@ public class UserSource {
     public static void deleteUser(Long id){
         USERS.remove(id);
     }
+
+    public static void updateUser(Long id, String input){
+        User u = getUser(id);
+        u.setEmail(input);
+    }
 }
