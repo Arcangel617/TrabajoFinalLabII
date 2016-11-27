@@ -50,22 +50,12 @@ public class UserController {
     }
 
     /**
-     * Duevelve los datos de un usuario del cual se especifica el id
-     * @return el usuario solicitado
-     */
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
-    public User getUserById(@PathVariable("id") Long id) {
-        return UserSource.getUser(id);
-    }
-
-    /**
      * Inserta un nuevo usuario
-     * @param name
-     * @param email
+     * @param input
      */
     @RequestMapping(value = "user/add", method = RequestMethod.POST)
-    public void add(@RequestParam(value = "name") String name, @RequestParam(value ="email") String email){
-        UserSource.addUser(name, email);
+    public void add(@RequestBody() User input){
+        UserSource.addUser(input.getName(), input.getEmail());
     }
 
     /**
@@ -77,8 +67,8 @@ public class UserController {
         UserSource.deleteUser(id);
     }
 
-    @RequestMapping("user/change")
-    public void change(){
-        System.out.println("Not implemented");
+    @RequestMapping(value = "user/{id}/update", method = RequestMethod.PUT)
+    public void update(@PathVariable(value = "id") Long id, @RequestBody String input){
+        UserSource.updateUser(id,input);
     }
 }
