@@ -2,10 +2,8 @@ package app;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by arcangel on 23/11/16.
@@ -13,11 +11,29 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserController {
 
+    /**
+     * Por defecto lista todos los usuarios disponibles
+     * @return una lista de usuarios
+     */
     @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public User getById(@RequestParam(value="userId") Long id) {
+    public Collection<User> getAllUsers() {
+        return UserSource.getUsers();
+    }
+
+    /**
+     * Duevelve los datos de un usuario del cual se especifica el id
+     * @return el usuario solicitado
+     */
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+    public User getUserById(@PathVariable("id") long id) {
         return UserSource.getUser(id);
     }
 
+    /**
+     * Filtra usuarios por direccion de correo
+     * @param email
+     * @return
+     */
     @RequestMapping(value = "/user/filter", method = RequestMethod.GET)
     public Collection<User> getByEmail(@RequestParam(value="email", defaultValue = "all") String email) {
         if (email.equals("all")){
@@ -33,18 +49,31 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/user/list", method = RequestMethod.GET)
-    public Collection<User> listAllUsers() {
-        return UserSource.getUsers();
+    /**
+     * Duevelve los datos de un usuario del cual se especifica el id
+     * @return el usuario solicitado
+     */
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+    public User getUserById(@PathVariable("id") Long id) {
+        return UserSource.getUser(id);
     }
 
-    @RequestMapping(value = "user/add", method = RequestMethod.GET)
+    /**
+     * Inserta un nuevo usuario
+     * @param name
+     * @param email
+     */
+    @RequestMapping(value = "user/add", method = RequestMethod.POST)
     public void add(@RequestParam(value = "name") String name, @RequestParam(value ="email") String email){
         UserSource.addUser(name, email);
     }
 
-    @RequestMapping("user/delete")
-    public void delete(@RequestParam(value = "userId") Long id){
+    /**
+     * Borra el usuario que se especifica en la url
+     * @param id
+     */
+    @RequestMapping("user/delete/{id}")
+    public void delete(@PathVariable(value = "id") Long id){
         UserSource.deleteUser(id);
     }
 
