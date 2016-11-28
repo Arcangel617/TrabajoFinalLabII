@@ -1,9 +1,6 @@
 package app;
 
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -36,9 +33,9 @@ public class CalendarController {
         return CalendarSource.getCalendar(calendarId);
     }
 
-    @RequestMapping("/calendar/add")
-    public void add(){
-        System.out.println("Not implemented");
+    @RequestMapping(value = "/users/{userId}/calendars/add", method = RequestMethod.POST)
+    public void add(@PathVariable("userId") Long userId, @RequestBody Calendar input){
+        CalendarSource.addCalendar(input.getName(), userId);
     }
 
     @RequestMapping("/calendar/delete")

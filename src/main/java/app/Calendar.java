@@ -11,13 +11,14 @@ public class Calendar {
     private User owner;
     private ArrayList<Event> events = new ArrayList<>();
 
-    public Calendar(long id, String name, long userId) {
-        this.id = id;
+    public Calendar(){}
+
+    public Calendar(String name) {
         this.name = name;
-        this.owner = UserSource.getUser(userId);
     }
 
-    public Calendar(String name, long userId) {
+    public Calendar(long id, String name, long userId) {
+        this.id = id;
         this.name = name;
         this.owner = UserSource.getUser(userId);
     }

@@ -33,4 +33,9 @@ public class CalendarSource {
 //        }
         return CALENDARS.get(calendarId);
     }
+
+    public static void addCalendar(String name, Long userId){
+        Calendar c = new Calendar(counter.incrementAndGet(), name, userId);
+        CALENDARS.put(c.getId(), c);
+    }
 }
