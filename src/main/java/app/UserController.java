@@ -62,13 +62,18 @@ public class UserController {
      * Borra el usuario que se especifica en la url
      * @param id
      */
-    @RequestMapping("user/delete/{id}")
+    @RequestMapping(value = "user/delete/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable(value = "id") Long id){
         UserSource.deleteUser(id);
     }
 
+    /**
+     * Modifica los datos de un usuario
+     * @param id
+     * @param input
+     */
     @RequestMapping(value = "user/{id}/update", method = RequestMethod.PUT)
-    public void update(@PathVariable(value = "id") Long id, @RequestBody String input){
-        UserSource.updateUser(id,input);
+    public void update(@PathVariable(value = "id") Long id, @RequestBody User input){
+        UserSource.updateUser(id,input.getEmail());
     }
 }
