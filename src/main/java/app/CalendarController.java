@@ -1,8 +1,11 @@
 package app;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -11,9 +14,26 @@ import java.util.Collection;
 @RestController
 public class CalendarController {
 
-    @RequestMapping("/calendar/list")
-    public Collection<Calendar> listAllCalendars() {
+    @RequestMapping(value = "/calendars", method = RequestMethod.GET)
+    public Collection<Calendar> getAllCalendars() {
         return CalendarSource.getCalendars();
+    }
+
+    @RequestMapping(value = "/users/{userId}/calendars", method = RequestMethod.GET)
+    public Collection<Calendar> getCalendarByUser(@PathVariable("userId") Long userId) {
+        Collection result = new ArrayList();
+        for (Calendar c : CalendarSource.getCalendars()) {
+            if (c.getOwner().getId() == userId){
+                result.add(c);
+            }
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "/user/{userId}/calendars/{calendarId}", method = RequestMethod.GET)
+    public Calendar getById(@PathVariable("userId") Long userId,
+                                        @PathVariable("calendarId") Long calendarId) {
+        return CalendarSource.getCalendar(calendarId);
     }
 
     @RequestMapping("/calendar/add")

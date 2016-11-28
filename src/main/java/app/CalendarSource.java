@@ -26,4 +26,11 @@ public class CalendarSource {
     public static Collection<Calendar> getCalendars() {
         return CALENDARS.values();
     }
+
+    public static Calendar getCalendar(Long calendarId){
+//        if (UserSource.exists(userId)){
+//            return CALENDARS.get(calendarId);
+//        }
+        return CALENDARS.get(calendarId);
+    }
 }
