@@ -28,14 +28,20 @@ public class CalendarSource {
     }
 
     public static Calendar getCalendar(Long calendarId){
-//        if (UserSource.exists(userId)){
-//            return CALENDARS.get(calendarId);
-//        }
         return CALENDARS.get(calendarId);
     }
 
     public static void addCalendar(String name, Long userId){
         Calendar c = new Calendar(counter.incrementAndGet(), name, userId);
         CALENDARS.put(c.getId(), c);
+    }
+
+    public static void deleteCalendar(Long id){
+        CALENDARS.remove(id);
+    }
+
+    public static void updateCalendar(Long calendarId, String name){
+        Calendar c = getCalendar(calendarId);
+        c.setName(name);
     }
 }
