@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.spi.CalendarNameProvider;
 
 /**
  * Created by arcangel on 23/11/16.
@@ -30,7 +31,10 @@ public class CalendarController {
     @RequestMapping(value = "/user/{userId}/calendars/{calendarId}", method = RequestMethod.GET)
     public Calendar getById(@PathVariable("userId") Long userId,
                                         @PathVariable("calendarId") Long calendarId) {
-        return CalendarSource.getCalendar(calendarId);
+        if (CalendarSource.getCalendar(calendarId).getOwner().getId() == userId){
+            return CalendarSource.getCalendar(calendarId);
+        }
+        return null;
     }
 
     @RequestMapping(value = "/users/{userId}/calendars/add", method = RequestMethod.POST)
@@ -38,13 +42,18 @@ public class CalendarController {
         CalendarSource.addCalendar(input.getName(), userId);
     }
 
-    @RequestMapping("/calendar/delete")
-    public void delete(){
-        System.out.println("Not implemented");
+    @RequestMapping(value = "/users/{userId}/calendars/{calendarId}/delete", method = RequestMethod.DELETE)
+    public void delete(@PathVariable("calendarId") Long calendarId, @PathVariable("userId") Long userId){
+        if (CalendarSource.getCalendar(calendarId).getOwner().getId() == userId){
+            CalendarSource.deleteCalendar(calendarId);
+        }
     }
 
-    @RequestMapping("/calendar/change")
-    public void change(){
-        System.out.println("Not implemented");
+    @RequestMapping(value = "/users/{userId}/calendars/{calendarId}/update", method = RequestMethod.PUT)
+    public void update(@PathVariable("calendarId") Long calendarId, @PathVariable("userId") Long userId,
+                       @RequestBody Calendar input){
+        if (CalendarSource.getCalendar(calendarId).getOwner().getId() == userId){
+            CalendarSource.updateCalendar(calendarId, input.getName());
+        }
     }
 }
