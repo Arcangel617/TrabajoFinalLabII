@@ -28,7 +28,7 @@ public class CalendarController {
         return result;
     }
 
-    @RequestMapping(value = "/user/{userId}/calendars/{calendarId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/users/{userId}/calendars/{calendarId}", method = RequestMethod.GET)
     public Calendar getById(@PathVariable("userId") Long userId,
                                         @PathVariable("calendarId") Long calendarId) {
         if (CalendarSource.getCalendar(calendarId).getOwner().getId() == userId){
