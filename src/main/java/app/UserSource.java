@@ -71,4 +71,16 @@ public class UserSource {
         User u = getUser(id);
         u.setEmail(email);
     }
+
+    /**
+     * Verifica si un usuario existe.
+     * @param userId
+     * @return
+     */
+    public static boolean exists(Long userId){
+        if (USERS.get(userId) != null){
+            return true;
+        }
+        return false;
+    }
 }
