@@ -19,25 +19,27 @@ public class Event {
     }
 
     public Event(long id, String name, String fechaInicio, String fechaFin,
-                 String horaInicio, String horaFin) {
+                 String horaInicio, String horaFin, Long calendarId) {
         this.id = id;
         this.name = name;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
+        this.owner = CalendarSource.getCalendar(calendarId);
     }
 
     public Event(long id, String name, int diaInicio, int mesInicio, int anioInicio,
                  int diaFin, int mesFin, int anioFin,
                  int hinicio, int minicio, int sinicio,
-                 int hfin, int mfin, int sfin) {
+                 int hfin, int mfin, int sfin, Long calendarId) {
         this.id = id;
         this.name = name;
         this.fechaInicio = formatearFecha(diaInicio,mesInicio,anioInicio);
         this.fechaFin = formatearFecha(diaFin,mesFin,anioFin);
         this.horaInicio = formatearHora(hinicio, minicio, sinicio);
         this.horaFin = formatearHora(hfin, mfin, sfin);
+        this.owner = CalendarSource.getCalendar(calendarId);
     }
 
     public long getId() {
