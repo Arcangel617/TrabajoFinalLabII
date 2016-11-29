@@ -13,14 +13,11 @@ public class UserSource {
     private static final AtomicLong counter = new AtomicLong();
     static {
         User user1 = new User(counter.incrementAndGet(), "Artigue Arcangel Andres", "artigue_arcangel@hotmail.com" );
-        User user2 = new User(counter.incrementAndGet(), "Brutti Romina", "brutti_romina@hotmail.com" );
-        User user3 = new User(counter.incrementAndGet(), "Moglia Franco", "moglia_franco@hotmail.com" );
-        User user4 = new User(counter.incrementAndGet(), "Salinas Andres", "salinas_andres@hotmail.com" );        
+        User user2 = new User(counter.incrementAndGet(), "Chamorro Olga", "olga_chamorro@hotmail.com" );
+
 
         USERS.put(user1.getId(), user1);
         USERS.put(user2.getId(), user2);
-        USERS.put(user3.getId(), user3);
-        USERS.put(user4.getId(), user4);
     }
 
     /**

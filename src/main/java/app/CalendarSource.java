@@ -12,15 +12,17 @@ public class CalendarSource {
     private static final Map<Long, Calendar> CALENDARS = new HashMap<>();
     private static final AtomicLong counter = new AtomicLong();
     static {
-        Calendar calendar1 = new Calendar(counter.incrementAndGet(), "Calendario de Arcangel", 1);
-        Calendar calendar2 = new Calendar(counter.incrementAndGet(), "Calendario de Romina", 2);
-        Calendar calendar3 = new Calendar(counter.incrementAndGet(), "Calendario de Franco", 3);
-        Calendar calendar4 = new Calendar(counter.incrementAndGet(), "Calendario de Andrés", 4);
+        Calendar calendar1 = new Calendar(counter.incrementAndGet(), "Calendario de Nina", 2);
+        Calendar calendar2 = new Calendar(counter.incrementAndGet(), "Calendario de Lulu", 2);
+        Calendar calendar3 = new Calendar(counter.incrementAndGet(), "Calendario de Katy", 2);
+        Calendar calendar4 = new Calendar(counter.incrementAndGet(), "Calendario de Pancho", 1);
+        Calendar calendar5 = new Calendar(counter.incrementAndGet(), "Calendario de Firulais", 1);
 
         CALENDARS.put(calendar1.getId(), calendar1);
         CALENDARS.put(calendar2.getId(), calendar2);
         CALENDARS.put(calendar3.getId(), calendar3);
         CALENDARS.put(calendar4.getId(), calendar4);
+        CALENDARS.put(calendar5.getId(), calendar5);
     }
 
     /**
