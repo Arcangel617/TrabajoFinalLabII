@@ -1,28 +1,31 @@
 package app;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.Collection;
 
 /**
  * Created by arcangel on 23/11/16.
  */
 @RestController
 public class EventController {
-    private final AtomicLong counter = new AtomicLong();
 
-    @RequestMapping("/event")
-    public Event eventData(@RequestParam(value="name") String name) {
-        return new Event(counter.incrementAndGet(), name);
+    @RequestMapping(value = "/events", method = RequestMethod.GET)
+    public Collection<Event> getAllEvents() {
+        return EventSource.getEvents();
     }
 
-    @RequestMapping("/event/list")
-    public List<Event> listAllevents() {
-        return new ArrayList<Event>();
+    @RequestMapping(value = "/users/{userId}/calendars/{calendarId}/events", method = RequestMethod.GET)
+    public Collection<Calendar> getEventsByCalendar(@PathVariable("userId") Long userId,
+                                                    @PathVariable("calendarId") Long calendarId) {
+        Collection result = new ArrayList();
+        for (Event e : EventSource.getEvents()) {
+            if (e.getOwner().getId() == calendarId){
+                result.add(e);
+            }
+        }
+        return result;
     }
 
     @RequestMapping("/event/add")
