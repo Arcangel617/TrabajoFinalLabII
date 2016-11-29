@@ -54,6 +54,22 @@ public class Event {
         return owner;
     }
 
+    public String getFechaInicio(){
+        return fechaInicio;
+    }
+
+    public String getFechaFin(){
+        return fechaFin;
+    }
+
+    public String getHoraInicio(){
+        return horaInicio;
+    }
+
+    public String getHoraFin(){
+        return horaFin;
+    }
+
     private String formatearHora(int hora, int min, int seg){
         StringBuilder sb = new StringBuilder();
         if (hora < 10){

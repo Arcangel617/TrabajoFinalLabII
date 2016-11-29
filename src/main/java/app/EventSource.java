@@ -29,7 +29,8 @@ public class EventSource {
         EVENTS.put(event2.getId(), event2);
         EVENTS.put(event3.getId(), event3);
         EVENTS.put(event4.getId(), event4);
-        EVENTS.put(event4.getId(), event5);
+        EVENTS.put(event5.getId(), event5);
+        EVENTS.put(event6.getId(), event6);
     }
 
     /**
@@ -54,9 +55,10 @@ public class EventSource {
      * @param name
      * @param calendarId
      */
-    public static void addEvent(String name, Long calendarId){
-//        Event e = new Event(counter.incrementAndGet(), name, calendarId);
-//        EVENTS.put(e.getId(), e);
+    public static void addEvent(String name, String fechaInicio, String fechaFin,
+                                String horaInicio, String horaFin, Long calendarId){
+        Event e = new Event(counter.incrementAndGet(), name, fechaInicio, fechaFin, horaInicio, horaFin, calendarId);
+        EVENTS.put(e.getId(), e);
     }
 
     /**

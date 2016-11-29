@@ -28,18 +28,41 @@ public class EventController {
         return result;
     }
 
-    @RequestMapping("/event/add")
-    public void add(){
-        System.out.println("Not implemented");
+    @RequestMapping(value = "/users/{userId}/calendars/{calendarId}/events/{eventId}", method = RequestMethod.GET)
+    public Event getEventsById(@PathVariable("userId") Long userId,
+                                                    @PathVariable("calendarId") Long calendarId,
+                                                    @PathVariable("eventId") Long eventId) {
+        if (EventSource.getEvent(eventId).getOwner().getId() == calendarId){
+            return EventSource.getEvent(eventId);
+        }
+        return null;
     }
 
-    @RequestMapping("/event/delete")
-    public void delete(){
-        System.out.println("Not implemented");
+    @RequestMapping(value = "/users/{userId}/calendars/{calendarId}/events/add", method = RequestMethod.POST)
+    public void add(@PathVariable("userId") Long userId,
+                    @PathVariable("calendarId") Long calendarId,
+                    @RequestBody Event input){
+        EventSource.addEvent(input.getName(), input.getFechaInicio(),
+                input.getFechaFin(), input.getHoraInicio(), input.getHoraFin(), calendarId);
     }
 
-    @RequestMapping("/event/change")
-    public void change(){
-        System.out.println("Not implemented");
+    @RequestMapping(value = "/users/{userId}/calendars/{calendarId}/events/{eventId}/delete",
+            method = RequestMethod.DELETE)
+    public void delete(@PathVariable("calendarId") Long calendarId,
+                       @PathVariable("userId") Long userId,
+                       @PathVariable("eventId") Long eventId){
+//        if (CalendarSource.getCalendar(calendarId).getOwner().getId() == userId){
+//            CalendarSource.deleteCalendar(calendarId);
+//        }
+    }
+
+    @RequestMapping(value = "/users/{userId}/calendars/{calendarId}/events/{eventId}/update", method = RequestMethod.PUT)
+    public void update(@PathVariable("calendarId") Long calendarId,
+                       @PathVariable("userId") Long userId,
+                       @PathVariable("eventId") Long eventId,
+                       @RequestBody Calendar input){
+//        if (CalendarSource.getCalendar(calendarId).getOwner().getId() == userId){
+//            CalendarSource.updateCalendar(calendarId, input.getName());
+//        }
     }
 }
