@@ -51,9 +51,9 @@ public class EventController {
     public void delete(@PathVariable("calendarId") Long calendarId,
                        @PathVariable("userId") Long userId,
                        @PathVariable("eventId") Long eventId){
-//        if (CalendarSource.getCalendar(calendarId).getOwner().getId() == userId){
-//            CalendarSource.deleteCalendar(calendarId);
-//        }
+        if (EventSource.getEvent(eventId).getOwner().getId() == calendarId){
+            EventSource.deleteEvent(calendarId);
+        }
     }
 
     @RequestMapping(value = "/users/{userId}/calendars/{calendarId}/events/{eventId}/update", method = RequestMethod.PUT)

@@ -33,49 +33,26 @@ public class EventSource {
         EVENTS.put(event6.getId(), event6);
     }
 
-    /**
-     * Devuelve una coleccion con todos los calendarios.
-     * @return una coleccion de calendarios
-     */
     public static Collection<Event> getEvents() {
         return EVENTS.values();
     }
 
-    /**
-     * Devuelve el calendario que se pasa como parámetro
-     * @param eventId
-     * @return un objeto de tipo Calendar
-     */
     public static Event getEvent(Long eventId){
         return EVENTS.get(eventId);
     }
 
-    /**
-     * Agrega un evento.
-     * @param name
-     * @param calendarId
-     */
     public static void addEvent(String name, String fechaInicio, String fechaFin,
                                 String horaInicio, String horaFin, Long calendarId){
         Event e = new Event(counter.incrementAndGet(), name, fechaInicio, fechaFin, horaInicio, horaFin, calendarId);
         EVENTS.put(e.getId(), e);
     }
 
-    /**
-     * Borra el calendario que se pasa como parámetro.
-     * @param eventId
-     */
-    public static void deleteCalendar(Long eventId){
+    public static void deleteEvent(Long eventId){
         EVENTS.remove(eventId);
     }
 
-    /**
-     * Actualiza los datos del calendario que se pasa como parámetro.
-     * @param calendarId
-     * @param name
-     */
-    public static void updateCalendar(Long calendarId, String name){
-//        Calendar c = getCalendar(calendarId);
-//        c.setName(name);
+    public static void updateEvent(Long eventId, String name, String fechaInicio, String fechaFin,
+                                   String horaInicio, String horaFin){
+        Event e = EventSource.getEvent(eventId);
     }
 }
