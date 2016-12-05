@@ -1,6 +1,6 @@
 package app;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by arcangel on 23/11/16.
@@ -9,7 +9,7 @@ public class Calendar {
     private long id;
     private String name;
     private User owner;
-    private ArrayList<Event> events = new ArrayList<>();
+    private HashMap<Long, String> events = new HashMap<>();
 
     public Calendar(){}
 
@@ -39,7 +39,12 @@ public class Calendar {
         return owner;
     }
 
-    public ArrayList<Event> getEvents(){
+    public HashMap<Long, String> getEvents(){
+        for (Event e : EventSource.getEvents()) {
+            if (e.getOwner().getId() == this.id){
+                this.events.put(e.getId(), e.getName());
+            }
+        }
         return events;
     }
 }
