@@ -11,11 +11,21 @@ import java.util.Collection;
 @RestController
 public class EventController {
 
+    /**
+     * Devuelve una coleccion con todos los eventos creados
+     * @return una coleccion de eventos
+     */
     @RequestMapping(value = "/events", method = RequestMethod.GET)
     public Collection<Event> getAllEvents() {
         return EventSource.getEvents();
     }
 
+    /**
+     * Devuelve una coleccion con los eventos de un calendario
+     * @param userId
+     * @param calendarId
+     * @return
+     */
     @RequestMapping(value = "/users/{userId}/calendars/{calendarId}/events", method = RequestMethod.GET)
     public Collection<Calendar> getEventsByCalendar(@PathVariable("userId") Long userId,
                                                     @PathVariable("calendarId") Long calendarId) {
