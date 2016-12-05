@@ -24,7 +24,7 @@ public class EventController {
      * Devuelve una coleccion con los eventos de un calendario
      * @param userId
      * @param calendarId
-     * @return
+     * @return una coleccion con los calendarios del usuario
      */
     @RequestMapping(value = "/users/{userId}/calendars/{calendarId}/events", method = RequestMethod.GET)
     public Collection<Calendar> getEventsByCalendar(@PathVariable("userId") Long userId,
